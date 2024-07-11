@@ -3,6 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
+import cookieParser from 'cookie-parser';
 
 
 mongoose.connect(process.env.MONGO_URI)
@@ -17,6 +18,8 @@ const app = express();
 
 // allow server to recieve json
 app.use(express.json());
+
+app.use(cookieParser());
 
 app.listen(3000, () => {
     console.log("Server is running on port 3000!!!");
