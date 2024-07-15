@@ -42,7 +42,7 @@ export const google = async (req, res, next) => {
   try {
     // check if user with that email exists in our DB
     const user = await User.findOne({email: req.body.email});
-    console.log("User.findOne: " +user)
+   
     if(user) {
       // user is in db so create json web token cookie adding our own salt from process.env
       const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
