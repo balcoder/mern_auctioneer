@@ -171,7 +171,7 @@ export default function CreateListing() {
         setError(data.message);
       }
       // if all is successful go to listing page
-      navigate(`/api/listing/${data._id}`);
+      navigate(`/listing/${data._id}`);
     } catch (error) {
       setError(error.message);
       setLoading(false);
