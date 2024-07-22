@@ -58,11 +58,11 @@ export default function Search() {
       const searchQuery = urlParams.toString();
       const res = await fetch(`/api/listing/get?${searchQuery}`);
       const data = await res.json();
-      // if (data.length > 8) {
-      //   setShowMore(true);
-      // } else {
-      //   setShowMore(false);
-      // }
+      if (data.length > 8) {
+        setShowMore(true);
+      } else {
+        setShowMore(false);
+      }
       setListings(data);
       setLoading(false);
     };
@@ -117,6 +117,24 @@ export default function Search() {
     urlParams.set("order", sidebarData.order);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
+  };
+
+  const handleShowMore = async () => {
+    // get new listings from the last index of current listings
+    // pass startIndex to skip() fn in listing.controller.js
+    const numberOfListing = listings.length;
+    const startIndex = numberOfListing;
+    // create a new search string with index added
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set("startIndex", startIndex);
+    const searchQuery = urlParams.toString();
+    const res = await fetch(`/api/listing/get?${searchQuery}`);
+    const data = await res.json();
+    if (data.length < 9) {
+      setShowMore(false);
+    }
+    // keep previous listing adding the new listing to show user
+    setListings([...listings, ...data]);
   };
 
   return (
@@ -237,6 +255,14 @@ export default function Search() {
             listings.map((listing) => {
               return <ListingItem key={listing._id} listing={listing} />;
             })}
+          {showMore && (
+            <button
+              className="text-green-700 font-semibold hover:underline p-7 text-center w-full"
+              onClick={handleShowMore}
+            >
+              Showmore
+            </button>
+          )}
         </div>
       </div>
     </div>
