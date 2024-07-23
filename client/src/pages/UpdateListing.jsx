@@ -165,10 +165,11 @@ export default function CreateListing() {
       });
       // convert to json
       const data = await res.json();
-      console.log(data._id);
+
       setLoading(false);
       if (data.success === false) {
         setError(data.message);
+        console.log("/listing/", data._id);
       }
       // if all is successful go to listing page
       navigate(`/listing/${data._id}`);
