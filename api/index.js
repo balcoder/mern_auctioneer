@@ -5,6 +5,7 @@ import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
 import listingRouter  from './routes/listing.route.js';
 import cookieParser from 'cookie-parser';
+import path from 'path';
 
 
 mongoose.connect(process.env.MONGO_URI)
@@ -14,6 +15,8 @@ mongoose.connect(process.env.MONGO_URI)
     .catch((err) => {
         console.log(err);
     })
+// get the absolute path on dev machine or server
+const __dirname = path.resolve();
 
 const app = express();
 
@@ -29,6 +32,15 @@ app.listen(3000, () => {
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/listing', listingRouter);
+
+// tell express to use dist dir created by running build on client via vite 
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+//if you go to any address bar /api/user -auth -listing  above
+// use this
+app.use('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
 
 //catch errors
 app.use((err, req, res, next) => {
