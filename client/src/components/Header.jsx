@@ -39,6 +39,7 @@ export default function Header() {
           className="bg-slate-100 p-3 rounded-lg flex items-center"
         >
           <input
+            id="searchbox"
             type="text"
             placeholder="Search..."
             className="bg-transparent focus:outline-none w-24 sm:w-64"
