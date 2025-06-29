@@ -20,16 +20,19 @@ The api folder contains all our controllers and models for or database
 ### To Run
 
 1. Clone to folder of your choice.
-2. Change the env.example content to your information from mongodb and make your own unique
-   Json web token (jwt) secret key, just tap on your keyboard a bunch of times.
+2. Change the env.example content in the root folder to your information from
+   mongodb and make your own unique Json web token (jwt) secret key, just tap
+   on your keyboard a bunch of times.
 3. Then save env.example as .env
-4. Change the env.example for firebase in the client folder to your firebase key and
-   save it as .env
-5. Now you can run npm run dev in both the root folder which is the backend api
+4. Change the firebase config file at client/firebase.js to your own firebase
+   config settings and then change the env.example for firebase in the client folder
+   to your firebase key and save it as .env
+5. Now you can run _npm run dev_ in both the root folder which is the backend api
    and client folder which is the react frontend.
 
 6. In the root of the app which is your backend run _npm run dev_
    The api terminal should look like this after running _npm run dev_
+   ```
    [nodemon] 3.1.9
    [nodemon] to restart at any time, enter `rs`
    [nodemon] watching path(s): _._
@@ -37,7 +40,7 @@ The api folder contains all our controllers and models for or database
    [nodemon] starting `node api/index.js`
    Express Server running on port 3000!!!
    Connected to MongoDB
-
+   ```
 7. Open up another terminal and cd into the client folder and run _npm run dev_
    The terminal should look like this.
 
